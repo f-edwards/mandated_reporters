@@ -1,5 +1,5 @@
 ---
-title: 'Family surveillance: the reporting of child abuse and neglect across US States'
+title: 'Family surveillance: sources of child abuse and neglect reports across US States'
 author: "Frank Edwards"
 date: "7/17/2020"
 output:
@@ -17,7 +17,6 @@ dat<-read_csv("./data/ncands_st_rpt.csv") %>%
   filter(!(is.na(rptsrc)), 
          staterr!="XX",
          rptsrc!="unknown")
-library(xtable)
 ```
 
 ## Screened-in reports by report source as proportion of all reports, 2018
@@ -26,9 +25,9 @@ library(xtable)
 prop<-dat %>% 
   select(-total_report) %>% 
   pivot_wider(names_from = rptsrc, values_from = proportion) %>% 
-  rename(State = staterr)
+  rename(State = staterr) 
 
-knitr::kable(count,
+knitr::kable(prop,
              caption = "",
              digits = 3)
 
@@ -44,7 +43,5 @@ count<-dat %>%
 
 knitr::kable(count,
              caption = "")
-
-
 ```
 

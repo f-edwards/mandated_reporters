@@ -67,15 +67,15 @@ ncands1<-bind_rows(ncands)
 ncands_st_rpt<-ncands1 %>% 
   mutate(rptsrc = 
            case_when(
-             rptsrc==1 ~ "social services personnel",
-             rptsrc==2 ~ "medical personnel",
-             rptsrc==3 ~ "mental health personnel",
-             rptsrc==4 ~ "legal, law enforcement, or criminal justice",
-             rptsrc==5 ~ "education personnel",
-             rptsrc==6 ~ "child day care provider",
-             rptsrc==7 ~ "substitute care provider",
+             rptsrc==1 ~ "social services",
+             rptsrc==2 ~ "medical",
+             rptsrc==3 ~ "mental health",
+             rptsrc==4 ~ "police",
+             rptsrc==5 ~ "education",
+             rptsrc==6 ~ "day care",
+             rptsrc==7 ~ "substitute care",
              rptsrc==99 ~ "unknown",
-             rptsrc>7 ~ "community, family, or anonymous"
+             rptsrc>7 ~ "non - mandated"
            )) %>% 
   group_by(staterr, rptsrc) %>% 
   summarise(total_report = n()) %>% 
