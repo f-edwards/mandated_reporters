@@ -1,0 +1,50 @@
+---
+title: 'Family surveillance: the reporting of child abuse and neglect across US States'
+author: "Frank Edwards"
+date: "7/17/2020"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+abstract: This paper documents the scope of mandated reporting of children and families to state and local child welfare officials for suspected child abuse and neglect. It provides a descriptive account of the magnitude of reporting by professionals required by law to report suspected abuse or neglect. It situates reporting as a diffuse and networked form of family surveillance. We suggest that child welfare surveillance be understood as one particularly invasive component of a carceral approach to child and family social policy.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+library(tidyverse)
+
+dat<-read_csv("./data/ncands_st_rpt.csv") %>% 
+  filter(!(is.na(rptsrc)), 
+         staterr!="XX",
+         rptsrc!="unknown")
+library(xtable)
+```
+
+## Screened-in reports by report source as proportion of all reports, 2018
+
+```{r table2}
+prop<-dat %>% 
+  select(-total_report) %>% 
+  pivot_wider(names_from = rptsrc, values_from = proportion) %>% 
+  rename(State = staterr)
+
+knitr::kable(count,
+             caption = "",
+             digits = 3)
+
+```
+
+## Screened-in reports by report source, 2018
+
+```{r table}
+count<-dat %>% 
+  select(-proportion) %>% 
+  pivot_wider(names_from = rptsrc, values_from = total_report) %>% 
+  rename(State = staterr)
+
+knitr::kable(count,
+             caption = "")
+
+
+```
+

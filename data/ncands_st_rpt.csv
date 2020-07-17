@@ -1,0 +1,452 @@
+staterr,rptsrc,total_report,proportion
+AK,child day care provider,81,0.004816268283981448
+AK,"community, family, or anonymous",4851,0.2884409561184445
+AK,education personnel,3274,0.19467237483648472
+AK,"legal, law enforcement, or criminal justice",3264,0.19407777381377095
+AK,medical personnel,1760,0.1046497799976216
+AK,mental health personnel,928,0.05517897490783684
+AK,social services personnel,2547,0.15144488048519444
+AK,substitute care provider,61,0.0036270662385539305
+AK,unknown,52,0.0030919253181115472
+AL,child day care provider,208,0.0049130763416477706
+AL,"community, family, or anonymous",15667,0.37006330309901736
+AL,education personnel,6968,0.1645880574452003
+AL,"legal, law enforcement, or criminal justice",9820,0.23195389266817837
+AL,medical personnel,3335,0.07877456538170824
+AL,mental health personnel,1270,0.029998110355253214
+AL,social services personnel,4865,0.11491402116402116
+AL,substitute care provider,82,0.001936885865457294
+AL,unknown,121,0.002858087679516251
+AR,child day care provider,844,0.012000910021613014
+AR,"community, family, or anonymous",21420,0.3045728586053919
+AR,education personnel,17195,0.24449721305881014
+AR,"legal, law enforcement, or criminal justice",11718,0.16661926970765556
+AR,medical personnel,4938,0.07021385507905813
+AR,mental health personnel,6444,0.09162780116027755
+AR,social services personnel,7595,0.10799397110681379
+AR,substitute care provider,171,0.002431463997269935
+AR,unknown,3,4.2657263109998864e-5
+AZ,child day care provider,1466,0.013402325751481021
+AZ,"community, family, or anonymous",33059,0.30222884516931176
+AZ,education personnel,20470,0.18713888685731003
+AZ,"legal, law enforcement, or criminal justice",22950,0.2098113069553134
+AZ,medical personnel,16971,0.1551506618883932
+AZ,mental health personnel,7610,0.0695714181233087
+AZ,social services personnel,6728,0.061508081620712356
+AZ,unknown,130,0.0011884736341695311
+CA,child day care provider,868,0.0019752636908757838
+CA,"community, family, or anonymous",121932,0.27747448428095167
+CA,education personnel,94199,0.214363899097705
+CA,"legal, law enforcement, or criminal justice",84736,0.19282942869821476
+CA,medical personnel,27679,0.06298770011492029
+CA,mental health personnel,54671,0.12441202908279951
+CA,social services personnel,26027,0.059228327283898645
+CA,substitute care provider,363,8.26060737082845e-4
+CA,unknown,28960,0.06590280701355149
+CO,child day care provider,525,0.009810150235443606
+CO,"community, family, or anonymous",11793,0.22036400328873607
+CO,education personnel,10019,0.18721503849316093
+CO,"legal, law enforcement, or criminal justice",13054,0.2439270498542492
+CO,medical personnel,6162,0.11514313476343524
+CO,mental health personnel,6993,0.13067120113610883
+CO,social services personnel,3769,0.07042753569026086
+CO,substitute care provider,405,0.007567830181627925
+CO,unknown,796,0.014874056356977352
+CT,child day care provider,166,0.007220530665506742
+CT,"community, family, or anonymous",3787,0.16472379295345801
+CT,education personnel,6123,0.2663331883427577
+CT,"legal, law enforcement, or criminal justice",6622,0.2880382775119617
+CT,medical personnel,3349,0.14567203131796433
+CT,mental health personnel,1619,0.07042192257503262
+CT,social services personnel,1118,0.04862983906046107
+CT,substitute care provider,80,0.0034797738147020443
+CT,unknown,126,0.00548064375815572
+DC,child day care provider,49,0.002796165259073271
+DC,"community, family, or anonymous",4412,0.2517690025108423
+DC,education personnel,5488,0.31317050901620636
+DC,"legal, law enforcement, or criminal justice",2295,0.13096325039945217
+DC,medical personnel,909,0.05187171878566537
+DC,mental health personnel,764,0.04359735220269345
+DC,social services personnel,3539,0.2019516092216389
+DC,substitute care provider,68,0.0038803926044282126
+DE,child day care provider,204,0.014846081071246634
+DE,"community, family, or anonymous",3400,0.24743468452077724
+DE,education personnel,3225,0.2346990757586784
+DE,"legal, law enforcement, or criminal justice",3506,0.2551488246852485
+DE,medical personnel,1880,0.1368168255585474
+DE,mental health personnel,926,0.0673895640783058
+DE,social services personnel,539,0.03922567498726439
+DE,substitute care provider,61,0.004439269339931592
+FL,child day care provider,2373,0.006547037693058981
+FL,"community, family, or anonymous",124906,0.3446120059373051
+FL,education personnel,68388,0.18868049462828387
+FL,"legal, law enforcement, or criminal justice",94472,0.2606454888068555
+FL,medical personnel,32298,0.08910923868959923
+FL,mental health personnel,11245,0.031024626573303096
+FL,social services personnel,28675,0.07911348750462127
+FL,unknown,97,2.6762016697291243e-4
+GA,child day care provider,869,0.0042362346747264
+GA,"community, family, or anonymous",64328,0.313588612377215
+GA,education personnel,67460,0.32885660662490557
+GA,"legal, law enforcement, or criminal justice",25574,0.12466912033538889
+GA,medical personnel,21593,0.10526238818339143
+GA,mental health personnel,2827,0.013781168498793477
+GA,social services personnel,22292,0.10866990030955224
+GA,substitute care provider,192,9.359689960270066e-4
+HI,child day care provider,14,0.003556007112014224
+HI,"community, family, or anonymous",665,0.16891033782067563
+HI,education personnel,574,0.14579629159258317
+HI,"legal, law enforcement, or criminal justice",923,0.23444246888493778
+HI,medical personnel,710,0.18034036068072137
+HI,mental health personnel,125,0.031750063500127
+HI,social services personnel,637,0.1617983235966472
+HI,substitute care provider,1,2.54000508001016e-4
+HI,unknown,288,0.0731521463042926
+IA,child day care provider,478,0.008326655750270006
+IA,"community, family, or anonymous",22578,0.39330383583597534
+IA,education personnel,8871,0.15453088527331638
+IA,"legal, law enforcement, or criminal justice",9487,0.165261470926384
+IA,medical personnel,2863,0.04987283559209839
+IA,mental health personnel,2631,0.045831446190293695
+IA,social services personnel,8552,0.14897397484583494
+IA,substitute care provider,259,0.004511723513221614
+IA,unknown,1687,0.02938717207260565
+ID,child day care provider,123,0.007307075387631438
+ID,"community, family, or anonymous",7637,0.45369215231984794
+ID,education personnel,3255,0.19337016574585636
+ID,"legal, law enforcement, or criminal justice",3169,0.1882611536862116
+ID,medical personnel,1703,0.10117032020436048
+ID,mental health personnel,81,0.004811976474781679
+ID,social services personnel,767,0.04556525871799442
+ID,substitute care provider,55,0.0032673914334937324
+ID,unknown,43,0.0025545060298223727
+IL,child day care provider,850,0.004571416278544461
+IL,"community, family, or anonymous",38496,0.2070367541868795
+IL,education personnel,47978,0.25803224730824253
+IL,"legal, law enforcement, or criminal justice",44928,0.24162893007346534
+IL,medical personnel,25145,0.13523324979294174
+IL,mental health personnel,4909,0.026401273542793834
+IL,social services personnel,19985,0.10748206391377771
+IL,substitute care provider,1336,0.007185190762512235
+IL,unknown,2311,0.012428874140842646
+IN,child day care provider,1263,0.005642196301971418
+IN,"community, family, or anonymous",93450,0.4174689187800705
+IN,education personnel,48436,0.21637800481574632
+IN,"legal, law enforcement, or criminal justice",38837,0.17349641946133332
+IN,medical personnel,24321,0.10864913401444724
+IN,mental health personnel,10169,0.04542794473059965
+IN,social services personnel,6217,0.02777318638903904
+IN,substitute care provider,1156,0.005164195506792525
+KS,child day care provider,181,0.005081700263911505
+KS,"community, family, or anonymous",13954,0.39176820708630467
+KS,education personnel,9154,0.2570048851704195
+KS,"legal, law enforcement, or criminal justice",3192,0.08961760907406367
+KS,medical personnel,2313,0.0649390757482172
+KS,social services personnel,6743,0.18931439159975294
+KS,substitute care provider,81,0.002274131057330563
+KY,"community, family, or anonymous",33734,0.3183864543712778
+KY,education personnel,18988,0.17921153719101865
+KY,"legal, law enforcement, or criminal justice",20278,0.19138674695383803
+KY,medical personnel,7858,0.07416495993506554
+KY,mental health personnel,6439,0.06077222919596425
+KY,social services personnel,17725,0.16729115739997924
+KY,substitute care provider,931,0.008786914952856455
+LA,child day care provider,160,0.0055895196506550214
+LA,"community, family, or anonymous",10489,0.36642794759825326
+LA,education personnel,5790,0.2022707423580786
+LA,"legal, law enforcement, or criminal justice",4167,0.14557205240174673
+LA,medical personnel,4584,0.16013973799126638
+LA,mental health personnel,1047,0.036576419213973796
+LA,social services personnel,2299,0.08031441048034935
+LA,substitute care provider,89,0.003109170305676856
+MA,child day care provider,1236,0.013354366099790392
+MA,"community, family, or anonymous",13011,0.14057739265725955
+MA,education personnel,22859,0.24698014132290338
+MA,"legal, law enforcement, or criminal justice",23328,0.2520474533785682
+MA,medical personnel,15202,0.16425005942476825
+MA,social services personnel,15973,0.17258033148216176
+MA,substitute care provider,733,0.007919700931348186
+MA,unknown,212,0.0022905547032002938
+MD,child day care provider,64,0.0017897592214547386
+MD,"community, family, or anonymous",4488,0.12550686540451356
+MD,education personnel,3482,0.09737408764227187
+MD,"legal, law enforcement, or criminal justice",2992,0.08367124360300904
+MD,medical personnel,1356,0.03792052350457228
+MD,mental health personnel,1946,0.054419866327358145
+MD,social services personnel,2057,0.05752397997706871
+MD,substitute care provider,194,0.005425207640034677
+MD,unknown,19180,0.536368466679717
+ME,child day care provider,122,0.009296654728339557
+ME,"community, family, or anonymous",3298,0.25131448601691686
+ME,education personnel,2767,0.21085117732225864
+ME,"legal, law enforcement, or criminal justice",2851,0.21725215270898424
+ME,medical personnel,1313,0.10005334146155605
+ME,mental health personnel,1206,0.09189971805227463
+ME,social services personnel,1553,0.11834184256648632
+ME,substitute care provider,8,6.096167034976758e-4
+ME,unknown,5,3.810104396860474e-4
+MI,child day care provider,1262,0.006154086225477527
+MI,"community, family, or anonymous",58530,0.2854189118678286
+MI,education personnel,35672,0.17395290319749154
+MI,"legal, law enforcement, or criminal justice",36241,0.17672760609946994
+MI,medical personnel,27522,0.13420979484753764
+MI,mental health personnel,9881,0.048184251976183395
+MI,social services personnel,25180,0.12278913720881468
+MI,unknown,10779,0.052563308577196724
+MN,child day care provider,286,0.0061155540349826796
+MN,"community, family, or anonymous",12433,0.2658555360732156
+MN,education personnel,9627,0.20585468075097293
+MN,"legal, law enforcement, or criminal justice",10627,0.22723773681734594
+MN,medical personnel,4609,0.09855450540991319
+MN,mental health personnel,2937,0.06280203566693753
+MN,social services personnel,5782,0.12363683017576872
+MN,substitute care provider,465,0.009943121070863448
+MO,child day care provider,743,0.006770116723008374
+MO,"community, family, or anonymous",39803,0.36267961766608653
+MO,education personnel,22198,0.2022652099829608
+MO,"legal, law enforcement, or criminal justice",15999,0.14578075027107804
+MO,medical personnel,7226,0.0658423464878311
+MO,mental health personnel,6245,0.05690360556552799
+MO,social services personnel,15183,0.13834546730206748
+MO,substitute care provider,679,0.006186957274458527
+MO,unknown,1671,0.015225928726981147
+MS,child day care provider,191,0.003771573002646025
+MS,"community, family, or anonymous",31487,0.6217566446822795
+MS,education personnel,5165,0.10199044271553256
+MS,"legal, law enforcement, or criminal justice",2647,0.052268867738240986
+MS,medical personnel,3122,0.06164843410607796
+MS,mental health personnel,1702,0.03360846728012322
+MS,social services personnel,6187,0.12217132024801548
+MS,substitute care provider,115,0.002270842383792109
+MS,NA,26,5.134078432921291e-4
+MT,child day care provider,141,0.007248611967921036
+MT,"community, family, or anonymous",6520,0.33518404277195146
+MT,education personnel,2662,0.1368496812667078
+MT,"legal, law enforcement, or criminal justice",4657,0.23940982932346289
+MT,medical personnel,1330,0.06837343203783673
+MT,mental health personnel,1109,0.05701213242854205
+MT,social services personnel,2837,0.14584618548221262
+MT,substitute care provider,68,0.003495784495167592
+MT,unknown,128,0.00658030022619782
+NC,child day care provider,188,0.0014400171576512402
+NC,"community, family, or anonymous",6665,0.05105167210502934
+NC,education personnel,3608,0.02763607396173231
+NC,"legal, law enforcement, or criminal justice",5276,0.040412396403020974
+NC,medical personnel,3616,0.027697351287589808
+NC,social services personnel,2947,0.022573034912756407
+NC,unknown,108190,0.82869923556536
+NC,NA,64,4.902186068599967e-4
+ND,child day care provider,68,0.008401284902396838
+ND,"community, family, or anonymous",1770,0.21868050407709413
+ND,education personnel,2043,0.2524091919940697
+ND,"legal, law enforcement, or criminal justice",2725,0.3366691376328144
+ND,medical personnel,776,0.09587348653323449
+ND,mental health personnel,79,0.009760316283666914
+ND,social services personnel,606,0.0748702742772424
+ND,substitute care provider,27,0.003335804299481097
+NE,child day care provider,383,0.012805510047143
+NE,"community, family, or anonymous",9181,0.30696445885853757
+NE,education personnel,6747,0.22558427229262096
+NE,"legal, law enforcement, or criminal justice",6851,0.22906148650907754
+NE,medical personnel,3023,0.10107325554181015
+NE,mental health personnel,1139,0.03808218262061587
+NE,social services personnel,1990,0.0665351566418135
+NE,substitute care provider,225,0.007522819218295496
+NE,unknown,370,0.012370858270085928
+NH,child day care provider,116,0.006886316414366281
+NH,"community, family, or anonymous",5330,0.3164143662807955
+NH,education personnel,3453,0.204986642920748
+NH,"legal, law enforcement, or criminal justice",3400,0.20184030869694272
+NH,medical personnel,1172,0.06957554170376966
+NH,mental health personnel,1238,0.07349361828435738
+NH,social services personnel,2023,0.12009498367468091
+NH,substitute care provider,25,0.0014841199168892847
+NH,unknown,88,0.005224102107450282
+NJ,child day care provider,277,0.0029700316303007557
+NJ,"community, family, or anonymous",36599,0.3924194499544309
+NJ,education personnel,19125,0.2050608481209457
+NJ,"legal, law enforcement, or criminal justice",19293,0.20686216694365517
+NJ,medical personnel,8032,0.08612019514287246
+NJ,mental health personnel,4124,0.04421808824317804
+NJ,social services personnel,4792,0.05138047499061813
+NJ,substitute care provider,1023,0.01096874497399882
+NM,child day care provider,52,0.0015782924090205481
+NM,"community, family, or anonymous",16268,0.4937627098066592
+NM,education personnel,4708,0.1428961665705527
+NM,"legal, law enforcement, or criminal justice",8092,0.24560658026527454
+NM,medical personnel,1628,0.04941269311318178
+NM,mental health personnel,940,0.028530670470756064
+NM,social services personnel,1222,0.037089871611982884
+NM,substitute care provider,26,7.891462045102741e-4
+NM,unknown,11,3.3386954806203904e-4
+NV,child day care provider,167,0.004622453498671391
+NV,"community, family, or anonymous",9589,0.2654174047829938
+NV,education personnel,9023,0.24975088573959256
+NV,"legal, law enforcement, or criminal justice",8947,0.24764725420726305
+NV,medical personnel,4863,0.1346047387068202
+NV,mental health personnel,1451,0.04016275465013286
+NV,social services personnel,2068,0.05724092116917626
+NV,substitute care provider,20,5.535872453498672e-4
+NY,child day care provider,776,0.002819716211551389
+NY,"community, family, or anonymous",109347,0.3973292636398321
+NY,education personnel,47118,0.17121055213386385
+NY,"legal, law enforcement, or criminal justice",33569,0.12197816173398013
+NY,medical personnel,15355,0.05579477117058193
+NY,mental health personnel,14300,0.05196126523864029
+NY,social services personnel,52302,0.1900474191965989
+NY,substitute care provider,2377,0.008637197725332025
+NY,unknown,61,2.2165294961937464e-4
+OH,child day care provider,904,0.006758070062646711
+OH,"community, family, or anonymous",51375,0.38406620516424206
+OH,education personnel,18453,0.13794985272789798
+OH,"legal, law enforcement, or criminal justice",25389,0.18980159382802805
+OH,medical personnel,11401,0.08523092564627782
+OH,mental health personnel,7591,0.056748351599061046
+OH,social services personnel,18419,0.13769567752642675
+OH,substitute care provider,234,0.0017493234454196134
+OK,child day care provider,560,0.008161123903348975
+OK,"community, family, or anonymous",25008,0.36445247602669856
+OK,education personnel,9864,0.14375236818327553
+OK,"legal, law enforcement, or criminal justice",11492,0.16747792124515434
+OK,medical personnel,4840,0.07053542802180186
+OK,mental health personnel,4583,0.06679005508758634
+OK,social services personnel,11809,0.17209770031187152
+OK,substitute care provider,207,0.003016701157130782
+OK,unknown,255,0.003716226063132123
+OR,child day care provider,274,0.0045295994445454695
+OR,"community, family, or anonymous",14560,0.24069696318460598
+OR,education personnel,12890,0.21308955051164635
+OR,"legal, law enforcement, or criminal justice",13738,0.22710816485096957
+OR,medical personnel,5450,0.09009604734588617
+OR,mental health personnel,3366,0.055644641351606024
+OR,social services personnel,9871,0.16318129969747566
+OR,substitute care provider,342,0.005653733613264783
+PA,child day care provider,258,0.005703674227351107
+PA,"community, family, or anonymous",14000,0.3095017022593624
+PA,education personnel,8245,0.18227439536631737
+PA,"legal, law enforcement, or criminal justice",3488,0.07711013839147544
+PA,medical personnel,4846,0.10713180351063359
+PA,mental health personnel,6397,0.14142017066808152
+PA,social services personnel,7233,0.1599018437458549
+PA,substitute care provider,195,0.004310916567183977
+PA,unknown,572,0.012645355263739664
+PR,child day care provider,8,5.152315321697688e-4
+PR,"community, family, or anonymous",7693,0.4954595221227539
+PR,education personnel,2814,0.18123269144071616
+PR,"legal, law enforcement, or criminal justice",2310,0.14877310491402074
+PR,medical personnel,1269,0.08172860179042958
+PR,mental health personnel,219,0.014104463193147421
+PR,social services personnel,1200,0.07728472982546532
+PR,substitute care provider,7,4.508275906485477e-4
+PR,unknown,7,4.508275906485477e-4
+RI,child day care provider,121,0.009265640554406922
+RI,"community, family, or anonymous",3089,0.23654184853357837
+RI,education personnel,3698,0.2831763534727008
+RI,"legal, law enforcement, or criminal justice",3119,0.2388391147867371
+RI,medical personnel,1683,0.12887663680220537
+RI,mental health personnel,306,0.02343211578221916
+RI,social services personnel,977,0.074814304311203
+RI,substitute care provider,37,0.0028332950455624475
+RI,unknown,29,0.0022206907113867832
+SC,child day care provider,406,0.003882492445396473
+SC,"community, family, or anonymous",36911,0.3529721149064759
+SC,education personnel,28143,0.2691255785487511
+SC,"legal, law enforcement, or criminal justice",14738,0.14093638832574684
+SC,medical personnel,11553,0.11047890448686072
+SC,mental health personnel,3469,0.03317331599280878
+SC,social services personnel,9008,0.08614160578357495
+SC,substitute care provider,344,0.0032895995103851892
+SD,child day care provider,46,0.011197663096397274
+SD,"community, family, or anonymous",1078,0.26241480038948395
+SD,education personnel,533,0.12974683544303797
+SD,"legal, law enforcement, or criminal justice",1719,0.41845180136319376
+SD,medical personnel,414,0.10077896786757547
+SD,mental health personnel,184,0.044790652385589096
+SD,social services personnel,123,0.02994157740993184
+SD,substitute care provider,11,0.002677702044790652
+TN,child day care provider,617,0.005921134708213775
+TN,"community, family, or anonymous",38366,0.3681851770102588
+TN,education personnel,14972,0.1436810840378876
+TN,"legal, law enforcement, or criminal justice",20046,0.19237449977447865
+TN,medical personnel,6396,0.061380190589522376
+TN,mental health personnel,2979,0.028588428356189362
+TN,social services personnel,13203,0.12670460543362475
+TN,substitute care provider,324,0.0031093154707637974
+TN,unknown,7300,0.07005556461906087
+TX,child day care provider,2366,0.007509585354086789
+TX,"community, family, or anonymous",115525,0.3666715334027372
+TX,education personnel,58001,0.18409275575756037
+TX,"legal, law enforcement, or criminal justice",62067,0.19699807023334942
+TX,medical personnel,35321,0.11210738135743849
+TX,mental health personnel,13333,0.04231838610568012
+TX,social services personnel,19354,0.06142878907142676
+TX,substitute care provider,1226,0.0038912728842393925
+TX,unknown,7871,0.02498222583348145
+UT,child day care provider,180,0.005875440658049354
+UT,"community, family, or anonymous",11262,0.3676067371719546
+UT,education personnel,4372,0.14270792531662096
+UT,"legal, law enforcement, or criminal justice",6559,0.2140945293119206
+UT,medical personnel,2993,0.09769552160856508
+UT,mental health personnel,1499,0.04892936414675545
+UT,social services personnel,2998,0.0978587282935109
+UT,substitute care provider,201,0.006560908734821778
+UT,unknown,572,0.01867084475780128
+VA,child day care provider,377,0.006821800810654314
+VA,"community, family, or anonymous",18697,0.33832151129125654
+VA,education personnel,10687,0.19338086276780544
+VA,"legal, law enforcement, or criminal justice",12590,0.22781557614360162
+VA,medical personnel,4598,0.08320063694267515
+VA,mental health personnel,4324,0.07824261725535611
+VA,social services personnel,3519,0.06367617255356109
+VA,substitute care provider,38,6.876085697741748e-4
+VA,unknown,434,0.007853213665315576
+VT,child day care provider,102,0.018913406267383647
+VT,"community, family, or anonymous",1221,0.2264045985536807
+VT,education personnel,1383,0.2564435379195253
+VT,"legal, law enforcement, or criminal justice",1134,0.2102725755609123
+VT,medical personnel,391,0.0725013906916373
+VT,mental health personnel,578,0.10717596884850733
+VT,social services personnel,492,0.09122937140737994
+VT,substitute care provider,25,0.004635638791025403
+VT,unknown,67,0.012423511959948081
+WA,child day care provider,1451,0.024202695489725114
+WA,"community, family, or anonymous",18985,0.3166700026688017
+WA,education personnel,12001,0.2001768081131572
+WA,"legal, law enforcement, or criminal justice",6819,0.11374099279423538
+WA,medical personnel,3711,0.06189951961569255
+WA,mental health personnel,5726,0.09550974112623432
+WA,social services personnel,10676,0.17807579396850814
+WA,substitute care provider,583,0.009724446223645582
+WI,child day care provider,326,0.007513078749049342
+WI,"community, family, or anonymous",12366,0.28498997487958333
+WI,education personnel,6678,0.1539028830863543
+WI,"legal, law enforcement, or criminal justice",10295,0.2372611831946717
+WI,medical personnel,2101,0.04842017929985481
+WI,mental health personnel,2218,0.05111659099813325
+WI,social services personnel,5708,0.13154801686985781
+WI,substitute care provider,34,7.835726302689498e-4
+WI,unknown,3665,0.0844645202922265
+WV,child day care provider,203,0.0034493305240263714
+WV,"community, family, or anonymous",25017,0.4250832597023041
+WV,education personnel,11749,0.1996363759940189
+WV,"legal, law enforcement, or criminal justice",6035,0.10254536804186773
+WV,medical personnel,7296,0.12397199755318426
+WV,mental health personnel,1975,0.03355875756134031
+WV,social services personnel,6388,0.10854346496295793
+WV,substitute care provider,189,0.0032114456603004144
+WY,"community, family, or anonymous",1632,0.2795956827137228
+WY,education personnel,1457,0.24961452801096454
+WY,"legal, law enforcement, or criminal justice",1611,0.2759979441493918
+WY,medical personnel,383,0.06561589857803667
+WY,mental health personnel,405,0.06938495802638342
+WY,social services personnel,279,0.047798526640397465
+WY,substitute care provider,62,0.010621894808977215
+WY,unknown,8,0.0013705670721260923
+XX,"community, family, or anonymous",89,0.059932659932659935
+XX,education personnel,8,0.0053872053872053875
+XX,"legal, law enforcement, or criminal justice",702,0.4727272727272727
+XX,medical personnel,366,0.24646464646464647
+XX,mental health personnel,6,0.00404040404040404
+XX,social services personnel,303,0.20404040404040405
+XX,substitute care provider,2,0.0013468013468013469
+XX,unknown,9,0.006060606060606061
