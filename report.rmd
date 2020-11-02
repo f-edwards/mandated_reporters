@@ -1,0 +1,134 @@
+---
+title: "Mandated reporting and family surveillance"
+author: "Frank Edwards and others"
+date: "10/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+library(tidyverse)
+source("process_imputed_ncands.r")
+source("read.r")
+theme_set(theme_minimal())
+```
+
+
+# National overview
+
+## Report source
+
+```{r}
+nat_ncands<-nat_ncands %>% 
+  left_join(pop %>% 
+              filter(year%in%nat_ncands$year,
+                     age<=18) %>% 
+              group_by(age) %>% 
+              summarise(pop = sum(pop))) 
+
+rpts_pc<-nat_ncands %>% 
+  group_by(.imp, year, age, rptsrc) %>% 
+  summarise(n_total = sum(n_total),
+            pop = sum(pop)) %>% 
+  mutate(total_pc = n_total/pop) %>% 
+  group_by(year, age, rptsrc) %>% 
+  mutate(total_pc = mean(total_pc),
+         total_pc_max = max(total_pc),
+         total_pc_min = min(total_pc)) %>% 
+  ungroup()
+
+
+ggplot(rpts_pc,
+       aes(x = age, y = total_pc * 1000,
+           ymin = min(total_pc_min) * 1000,
+           ymax = max(total_pc_max) * 1000)) + 
+  geom_line() +
+  #geom_ribbon(alpha = 0.5) +
+  facet_wrap(~rptsrc) + 
+  labs(title = "Child subjects of CPS investigations",
+       subtitle = "US, 2018",
+       y = "Rate per 1,000",
+       x = "Age")
+
+```
+
+
+```{r}
+nat_ncands<-nat_ncands %>% 
+  left_join(pop %>% 
+              filter(year%in%nat_ncands$year,
+                     age<=18) %>% 
+              group_by(age, race_ethn) %>% 
+              summarise(pop = sum(pop))) 
+
+rpts_pc<-nat_ncands %>% 
+  group_by(.imp, year, race_ethn, age, rptsrc) %>% 
+  summarise(n_total = sum(n_total),
+            pop = sum(pop)) %>% 
+  mutate(total_pc = n_total/pop) %>% 
+  group_by(year, race_ethn, age, rptsrc) %>% 
+  mutate(total_pc = mean(total_pc),
+         total_pc_max = max(total_pc),
+         total_pc_min = min(total_pc)) %>% 
+  ungroup()
+
+
+ggplot(rpts_pc,
+       aes(x = age, y = total_pc * 1000,
+           ymin = min(total_pc_min) * 1000,
+           ymax = max(total_pc_max) * 1000,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line() +
+  #geom_ribbon(alpha = 0.5) +
+  facet_wrap(~rptsrc) + 
+  labs(title = "Child subjects of CPS investigations",
+       subtitle = "US, 2018 by child race/ethnicity",
+       y = "Rate per 1,000",
+       x = "Age",
+       color = "Race/Ethnicity")
+
+```
+
+## Report source by type of alleged maltreatment
+
+```{r}
+nat_ncands<-nat_ncands %>% 
+  mutate(chmal1 = case_when(
+    chmal1 == 1 ~ "Physical abuse",
+    chmal1 == 2 ~ "Neglect",
+    chmal1 == 3 ~ "Medical neglect",
+    chmal1 == 4 ~ "Sexual abuse",
+    chmal1 == 5 ~ "Psychological / emotional",
+    chmal1 == 6 ~ "No alleged maltreatment",
+    chmal1 == 8 ~ "other",
+    chmal1 == 9 ~ "unknown",
+    is.na(chmal1) ~ "unknown"
+  ))
+
+mal_type<-nat_ncands %>% 
+  filter(!is.na(chmal1)) %>% 
+  group_by(.imp, year, age, rptsrc, chmal1) %>% 
+  summarise(n_total = sum(n_total)) %>% 
+  ungroup()
+
+ggplot(mal_type,
+       aes(x = age, y = n_total,
+           color = chmal1)) +
+  geom_line() + 
+  facet_wrap(~rptsrc) + 
+  labs(x = "Age", y = "Children",
+       color = "Alleged \nmaltreatment type",
+       title = "Child subjects of CPS investigations",
+       subtitle = "US, 2018 by type of alleged maltreatment")
+```
+
+
+
+## To do 
+
+- substantiation rates by class of reporter / alleged type (natl)
+- same but by state
+- FC placement rates by class of reporter
+- maps of rate ratio of referral rates by reporter type by state (Black/white, AIAN/white)
+- more
