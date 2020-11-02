@@ -19,29 +19,24 @@ theme_set(theme_minimal())
 ## Report source
 
 ```{r}
-nat_ncands<-nat_ncands %>% 
+plot_dat<-nat_ncands %>% 
+  filter(.imp==1) %>% 
   left_join(pop %>% 
               filter(year%in%nat_ncands$year,
                      age<=18) %>% 
               group_by(age) %>% 
               summarise(pop = sum(pop))) 
 
-rpts_pc<-nat_ncands %>% 
+rpts_pc<-plot_dat %>% 
   group_by(.imp, year, age, rptsrc) %>% 
   summarise(n_total = sum(n_total),
             pop = sum(pop)) %>% 
   mutate(total_pc = n_total/pop) %>% 
-  group_by(year, age, rptsrc) %>% 
-  mutate(total_pc = mean(total_pc),
-         total_pc_max = max(total_pc),
-         total_pc_min = min(total_pc)) %>% 
   ungroup()
 
 
 ggplot(rpts_pc,
-       aes(x = age, y = total_pc * 1000,
-           ymin = min(total_pc_min) * 1000,
-           ymax = max(total_pc_max) * 1000)) + 
+       aes(x = age, y = total_pc * 1000)) + 
   geom_line() +
   #geom_ribbon(alpha = 0.5) +
   facet_wrap(~rptsrc) + 
@@ -54,29 +49,24 @@ ggplot(rpts_pc,
 
 
 ```{r}
-nat_ncands<-nat_ncands %>% 
+plot_dat<-nat_ncands %>% 
+  filter(.imp==1) %>% 
   left_join(pop %>% 
               filter(year%in%nat_ncands$year,
                      age<=18) %>% 
               group_by(age, race_ethn) %>% 
               summarise(pop = sum(pop))) 
 
-rpts_pc<-nat_ncands %>% 
+rpts_pc<-plot_dat %>% 
   group_by(.imp, year, race_ethn, age, rptsrc) %>% 
   summarise(n_total = sum(n_total),
             pop = sum(pop)) %>% 
   mutate(total_pc = n_total/pop) %>% 
-  group_by(year, race_ethn, age, rptsrc) %>% 
-  mutate(total_pc = mean(total_pc),
-         total_pc_max = max(total_pc),
-         total_pc_min = min(total_pc)) %>% 
   ungroup()
 
 
 ggplot(rpts_pc,
        aes(x = age, y = total_pc * 1000,
-           ymin = min(total_pc_min) * 1000,
-           ymax = max(total_pc_max) * 1000,
            color = race_ethn,
            fill = race_ethn)) + 
   geom_line() +
@@ -93,7 +83,7 @@ ggplot(rpts_pc,
 ## Report source by type of alleged maltreatment
 
 ```{r}
-nat_ncands<-nat_ncands %>% 
+plot_dat<-nat_ncands %>% 
   mutate(chmal1 = case_when(
     chmal1 == 1 ~ "Physical abuse",
     chmal1 == 2 ~ "Neglect",
@@ -106,7 +96,7 @@ nat_ncands<-nat_ncands %>%
     is.na(chmal1) ~ "unknown"
   ))
 
-mal_type<-nat_ncands %>% 
+mal_type<-plot_dat %>% 
   filter(!is.na(chmal1)) %>% 
   group_by(.imp, year, age, rptsrc, chmal1) %>% 
   summarise(n_total = sum(n_total)) %>% 
