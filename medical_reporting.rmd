@@ -1,0 +1,471 @@
+---
+title: "Medical reporting of infants for child abuse and neglect, national"
+author: "Frank Edwards"
+output: bookdown::pdf_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+library(tidyverse)
+library(bookdown)
+library(data.table)
+library(viridisLite)
+library(RColorBrewer)
+
+
+## from read.r and process_imputed
+nat_ncands<-readRDS("nat_ncands.RDS")
+state_ncands<-readRDS("state_ncands.RDS")
+pop<-readRDS("pop.RDS")
+births18<-readRDS("births.RDS")
+theme_set(theme_minimal())
+options(scipen=999)
+
+fc_match<-read_csv("./data/afcars_matched.csv")
+
+### subset to subst_ab removals
+
+fc_match<-fc_match %>% 
+  mutate(subst_ab = case_when(
+    aaparent == 1 | aachild == 1 | daparent == 1 | dachild == 1 ~ T,
+    aaparent == 0 & aachild == 0 & daparent == 0 & dachild == 0 ~ F
+  )) %>% 
+  mutate(race_ethn =
+             case_when(
+               blkafram==1 ~ "Black",
+               amiakn==1 ~ "AIAN",
+               asian==1 | hawaiipi==1 ~ "Asian/PI",
+               hisorgin==1 ~ "Latinx",
+               white == 1 ~ "White")) %>% 
+  filter(age_at_report<=31)
+
+ncands_19<-fread("./data/ncands19_infants.csv") %>% 
+  filter(chage!=77)
+
+ncands_19<-ncands_19 %>% 
+  mutate(chmal1 = case_when(
+    chmal1 == 1 ~ "Physical abuse",
+    chmal1 == 2 ~ "Neglect",
+    chmal1 == 3 ~ "Medical neglect",
+    chmal1 == 4 ~ "Sexual abuse",
+    chmal1 == 5 ~ "Psychological / emotional",
+    chmal1 == 6 ~ "No alleged maltreatment",
+    chmal1 == 8 ~ "other",
+    chmal1 == 9 ~ "unknown",
+    is.na(chmal1) ~ "unknown"
+  )) %>% 
+   mutate(race_ethn =
+             case_when(
+               chracbl==1 ~ "Black",
+               chracai==1 ~ "AIAN",
+               chracas==1 | chracnh==1 ~ "Asian/PI",
+               cethn==1 ~ "Latinx",
+               chracwh == 1 ~ "White"))
+
+
+nat_ncands<-nat_ncands %>% 
+  mutate(chmal1 = case_when(
+    chmal1 == 1 ~ "Physical abuse",
+    chmal1 == 2 ~ "Neglect",
+    chmal1 == 3 ~ "Medical neglect",
+    chmal1 == 4 ~ "Sexual abuse",
+    chmal1 == 5 ~ "Psychological / emotional",
+    chmal1 == 6 ~ "No alleged maltreatment",
+    chmal1 == 8 ~ "other",
+    chmal1 == 9 ~ "unknown",
+    is.na(chmal1) ~ "unknown"
+  ))
+
+```
+
+
+# National overview
+
+## Report source
+
+Medical professionals are a major source of reports to child protection agencies, and consitute a key component of systems of family surveillance organized under the umbrella of mandated reporting. Medical professionals were the origin of `r nat_ncands %>% filter(.imp==1, rptsrc=="medical") %>% summarise(n_total = sum(n_total))` investigated maltreatment reports in 2018, about 9 percent of all reports nationally. Medical professionals were responsible for about 14 percent of all investigations originating from a professional mandated reporter. We show the distribution of reports by source and child age for 2018 in Figure \@ref(fig:all).
+
+Figure \@ref(fig:allRace) shows rates of reporting by type of reporter by child race/ethnicity and age. For the most active types of mandated reporters -- education personnel, medical personnel, police, and social service personnel -- Black and Native children are reported more often than their white peers. Note that medical professionals report Black and Native infants at exceptionally high rates. 
+
+```{r all, fig.cap = "Children subject to CPS investigations in 2018"}
+plot_dat<-nat_ncands %>% 
+  filter(.imp==1) %>% 
+  left_join(pop %>% 
+              filter(year%in%nat_ncands$year,
+                     age<=18) %>% 
+              group_by(age) %>% 
+              summarise(pop = sum(pop))) 
+
+rpts_pc<-plot_dat %>% 
+  group_by(.imp, year, age, rptsrc) %>% 
+  summarise(n_total = sum(n_total),
+            pop = sum(pop)) %>% 
+  mutate(total_pc = n_total/pop) %>% 
+  ungroup()
+
+
+ggplot(rpts_pc,
+       aes(x = age, y = total_pc * 1000)) + 
+  geom_line() +
+  #geom_ribbon(alpha = 0.5) +
+  facet_wrap(~rptsrc) + 
+  labs(y = "Rate per 1,000",
+       x = "Age")
+
+```
+
+
+```{r allRace, fig.cap = "Children subject to CPS investigations in 2018 by race/ethnicity"}
+plot_dat<-nat_ncands %>% 
+  filter(.imp==1) %>% 
+  left_join(pop %>% 
+              filter(year%in%nat_ncands$year,
+                     age<=18) %>% 
+              group_by(age, race_ethn) %>% 
+              summarise(pop = sum(pop))) 
+
+rpts_pc<-plot_dat %>% 
+  group_by(.imp, year, race_ethn, age, rptsrc) %>% 
+  summarise(n_total = sum(n_total),
+            pop = sum(pop)) %>% 
+  mutate(total_pc = n_total/pop) %>% 
+  ungroup()
+
+
+ggplot(rpts_pc,
+       aes(x = age, y = total_pc * 1000,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line() +
+  #geom_ribbon(alpha = 0.5) +
+  facet_wrap(~rptsrc) + 
+  labs(y = "Rate per 1,000",
+       x = "Age",
+       color = "Race/Ethnicity")
+
+```
+
+## Infants reported by medical professionals
+
+
+
+```{r}
+### set up medical infant tibble, with imputation uncertainty
+med_nat_inf<-nat_ncands %>% 
+  filter(rptsrc=="medical",
+         age==0) %>% 
+  group_by(year, race_ethn, age, rptsrc, chmal1) %>% 
+  summarise(n_mean = mean(n_total),
+            n_min = min(n_total),
+            n_max = max(n_total),
+            n_sd = sd(n_total)) %>% 
+  ungroup()
+
+### join to pop
+pop_nat_inf<-pop %>% 
+  filter(age==0,
+         year == 2018) %>% 
+  group_by(year, age, race_ethn) %>% 
+  summarise(pop = sum(pop))
+
+med_nat_inf<-med_nat_inf %>% 
+  left_join(pop_nat_inf) %>% 
+  mutate(rate_mean = n_mean / pop * 1e3,
+         rate_min = n_min / pop * 1e3,
+         rate_max = n_max / pop * 1e3) %>% 
+  filter(!(is.na(chmal1)))
+
+```
+
+Figure \@ref(fig:medInfant) shows the rates at which medical professionals report infants to child protection agencies by child race/ethnicity and maltreatment type. Medical professionals report AIAN and Black infants for neglect at incredibly high rates. About 3 percent of all Native and Black infants are reported to CPS for neglect by medical professionals. For all groups of children, neglect is the most common allegation, followed distantly by physical abuse.
+
+```{r medInfant, fig.cap = "Medical professional reports involving infants by race/ethnicity and alleged maltreatment type"}
+### visual for med rprts / type / race
+ggplot(med_nat_inf,
+       aes(x = race_ethn,
+           y = rate_mean,
+           ymin = rate_min,
+           ymax = rate_max,
+           color = chmal1)) + 
+  geom_pointrange(position = 
+                    position_jitter(width = 0.1, height = NULL),
+                  alpha = 0.7) + 
+  labs(y = "Reports per 1,000 infants",
+       x = "",
+       color = "Alleged maltreatment type")  +
+  scale_color_brewer(palette="Set1")
+```
+
+Figure \@ref(fig:medInfantDisp) shows these rates of medical reporting as rate ratios relative to white infants for all non-white children for the two most commonly reported kinds of maltreatment reported by medical professionals, neglect and physical abuse.
+
+```{r medInfantDisp, fig.cap = "Medical professional reports involving infants by race/ethnicity and alleged maltreatment type"}
+
+med_nat_wht<-med_nat_inf %>% 
+  filter(race_ethn=="White") %>% 
+  select(-race_ethn) %>% 
+  rename(white_rate = rate_mean) %>% 
+  select(year, age, rptsrc, chmal1, white_rate)
+
+med_nat_inf_disp <- med_nat_inf %>% 
+  filter(chmal1 %in% c("Neglect", "Physical abuse")) %>% 
+  left_join(med_nat_wht) %>% 
+  mutate(rr = rate_mean / white_rate)
+  
+
+### visual for med rprts / type / race
+ggplot(med_nat_inf_disp %>% 
+         filter(race_ethn !="White",
+                chmal1!="unknown"),
+       aes(x = race_ethn,
+           y = rr,
+           color = chmal1)) + 
+  geom_point(size = 4, alpha = 0.8,
+             position = position_dodge(width = 0.1)) + 
+  geom_hline(yintercept = 1, lty = 2) + 
+  labs(y = "Rate ratio relative to white",
+       x = "",
+       color = "Alleged maltreatment type") +
+  scale_color_brewer(palette = "Set1")
+
+```
+
+- substantiation rates
+
+```{r}
+#### compute substantiation rates for med vs other reporter types on infants
+#### fcdrug: 40000 / 115000 missing, not usable
+
+sub_rpts<-ncands_19 %>% 
+  group_by(rptsrc) %>% 
+  summarise(prop = sum(rptvictim)/n()) %>% 
+  mutate(var = "Proportion of reports substantiated")
+
+#### compute placement rates for med vs others
+#### assignment of AFCARS ID != placement (!!!)
+### use fostercr or afcars backtrace
+### 12% of fostercr is missing
+fc_rpts<-ncands_19 %>% 
+  group_by(rptsrc) %>% 
+  summarise(prop = sum(fostercr==1, na.rm=T)/n()) %>% 
+  mutate(var = "Proportion resulting in child removal")
+
+
+plot_dat<-sub_rpts %>% 
+  bind_rows(fc_rpts) %>% 
+  filter(!(is.na(rptsrc)))
+
+ggplot(plot_dat,
+       aes(x = prop,
+           y = rptsrc,
+           fill = var)) + 
+  geom_col(position = position_dodge())+
+  scale_fill_brewer(palette = "Set1") + 
+  labs(x = "", y = "Proportion", fill = "")
+
+### quick check on fcdrug / cddrug / fcalc / cdalc
+
+ncands_19<-ncands_19 %>% 
+  mutate(
+    subst_ab = ifelse(
+      (fcdrug==1 | 
+         cddrug==1 |
+         fcalc==1 |
+         cdalc==1),
+      T, F)) %>% 
+  mutate(subst_nonmissing = 
+           case_when(
+             (fcdrug<=2 | 
+                cddrug<=2 |
+                fcalc<=2 |
+                cdalc<=2) ~ T
+           ))
+
+### is missingness a function of case processing?
+na_test<-glm(is.na(subst_nonmissing) ~ rptvictim + fostercr==1,
+    data = ncands_19,
+    family = "binomial")
+
+### expected missing prob for subst or fc case
+rptvictim<-c(1,0)
+fostercr<-c(1,2)
+fake_data<-expand_grid(rptvictim, fostercr)
+### definitely a function of processing
+fake_data<-fake_data %>% 
+  mutate(prop_missing_subst_abuse = predict(na_test, fake_data, type = "response"))
+
+knitr::kable(fake_data)
+
+### then can check states to see who has no missing data for some cases, subset to those
+
+na_test_st<-glm(is.na(subst_nonmissing) ~ rptvictim + 
+                  staterr,
+    data = ncands_19,
+    family = "binomial")
+
+staterr<-unique(ncands_19$staterr)
+
+fake_data<-expand_grid(rptvictim, staterr)
+
+fake_data<-fake_data %>% 
+  mutate(prop_missing_subst_abuse = predict(na_test_st, fake_data, type = "response"))
+
+### how many states have less than 10 percent missing on the subst_ab variable
+### by substantiation
+
+fake_data %>% 
+  group_by(rptvictim, prop_missing_subst_abuse<=0.1) %>% 
+  summarise(nstates = n())
+
+print("usable states for substance abuse measure")
+qual_flag<-fake_data %>% 
+  filter(rptvictim==0) %>% 
+  filter(prop_missing_subst_abuse<=0.1)
+qual_flag
+
+ncands_19 <-ncands_19 %>% 
+  left_join(qual_flag %>% 
+              mutate(subst_ab_variable_usable=T) %>% 
+              select(staterr, subst_ab_variable_usable))
+
+### proportion of data that's usable there
+sum(ncands_19$subst_ab_variable_usable, na.rm=T)/nrow(ncands_19)
+
+### check coverage of afcars_19 in ncands_19
+# table(afcars_19$stfcid%in%ncands_19$stfcid)
+### only 16717 matches / 52578
+### for backtrace, broadly search ncands: use 18 afcars data and search 17/18/19 ncands
+```
+
+
+```{r}
+### check quality in state data
+
+qual_check<-ncands_19 %>% 
+  group_by(staterr) %>% 
+  filter(subst_ab_variable_usable==T) %>% 
+  summarise(subst_ab_prop = sum(subst_ab, na.rm=T)/n()) %>% 
+  mutate(flag = ifelse(subst_ab_prop>=0.05, T, F)) %>% 
+  filter(flag==T)
+
+ncands_19<-ncands_19 %>% 
+  mutate(subst_ab_variable_usable = case_when(
+    staterr%in%qual_check$staterr ~ T
+  ))
+```
+
+
+## Substance abuse reporting in states with valid data
+
+Quality on the 'risk factor' variables in NCANDS is highly variable across places. Because reporting systems are typically organized at the state-level (a small number of states have county-administered data systems), I examine data quality for the substance abuse risk factor variables at the state level as a function of substantiation, as data quality also typically improves as cases move further 'up' the system.
+
+```{r}
+ncands_19 %>% 
+  filter(subst_ab_variable_usable == T) %>% 
+  group_by(rptsrc) %>% 
+  summarise(prop_subst_ab = sum(subst_ab, na.rm=T)/n())
+
+ncands_19_subst_ab<-ncands_19 %>% 
+  filter(subst_ab_variable_usable==T)
+
+```
+
+This portion of the analysis proceeds for those states with less than 10 percent of missing data on an aggregate substance abuse measure (parental OR child drug OR alcohol abuse). This subset includes 22 states, representing `r round(nrow(ncands_19_subst_ab)/nrow(ncands_19) * 100, 1)` percent of all infants with cases in the 2019 NCANDS. 
+
+The included states with high-quality data in 2019 are `r unique(ncands_19_subst_ab$staterr)`. Note that the composition of this subset is non-random, and results may differ substantially from rates estimated with other geographic subsets.
+
+```{r}
+knitr::kable(ncands_19_subst_ab %>% 
+  group_by(rptsrc) %>% 
+  summarise(prop_subst_ab = sum(subst_ab, na.rm=T)/n()))
+```
+
+This table shows the proportion of investigated cases with infants in the 22 states that included allegations of substance abuse by the source of report. Medical professionals originate cases with substance abuse allegations at rates much higher than other classes of professional mandated reporters. About half of all infant-involved cases reported by medical professionals involve substance abuse allegations.
+
+### Racial inequalities in medical substance abuse reporting (national)
+
+Proportion of infant reports involving substance abuse by race/ethnicity
+
+```{r}
+ncands_19_subst_ab %>% 
+  filter(rptsrc=="medical") %>% 
+  group_by(race_ethn) %>% 
+  summarise(prop_subst_ab = sum(subst_ab, na.rm=T)/n())
+```
+
+Rates of reporting per capita for infants by race/ethnicity. Black and AIAN children infants are reported at higher rates than white infants (both overall and for substance abuse) in these states. Rates are rates per 1,000 infants.
+
+```{r}
+pop_subst_ab<-pop %>% 
+  filter(year==2018, age==0,
+         state%in%unique(ncands_19_subst_ab$staterr)) %>% 
+  group_by(race_ethn) %>% 
+  summarise(pop = sum(pop))
+
+rate_tab<-ncands_19_subst_ab %>% 
+  filter(rptsrc=="medical") %>% 
+  group_by(race_ethn) %>% 
+  summarise(n_subst_ab = sum(subst_ab, na.rm=T),
+            n_tot = n()) %>% 
+  left_join(pop_subst_ab) %>% 
+  mutate(subst_ab_report_rate = n_subst_ab / pop * 1e3,
+         total_report_rate = n_tot/pop * 1e3)
+
+knitr::kable(rate_tab)
+```
+
+## Infants in foster care 1 month old or less
+
+NCANDS does not provide a child's date of birth, only their year in age at the time of the report. However, for those children who do enter foster care, the AFCARS provides more granular data for the full country. Of course, this is a subset of all children who become child welfare involved because of allegations of substance abuse. AFCARS does not identify the origin of a maltreatment allegation, but does identify whether alleged substance abuse was included as a reason for removal. 
+
+We use unique child identifiers in the AFCARS and NCANDS to children placed into foster care to the child maltreatment investigation that triggered their initial foster care placement. This subset of the data includes information on all children who were placed into foster care in 2018 who had an initial report to a child welfare agency filed while the child was one month old or less. We match the 2018 AFCARS files to identifiers in the 2017, 2018, and 2019 NCANDS to maximize possible matches.
+
+```{r}
+fc_match_count<-fc_match %>% 
+  mutate(rpt_reduced = case_when(
+    rptsrc == "medical" ~ "medical",
+    rptsrc == "non-professional" ~ "non-professional",
+    T ~ "other professional"
+  )) %>% 
+  group_by(race_ethn, rpt_reduced) %>% 
+  filter(!(is.na(rpt_reduced)),
+         !(is.na(race_ethn))) %>% 
+  summarise(fc_subst = sum(subst_ab, na.rm=T),
+            fc_drug = sum(daparent == 1 | dachild == 1, na.rm = T),
+            foster_care = n()) %>% 
+  left_join(births18) %>% 
+  mutate(fc_subst_rt = fc_subst / births * 1e3,
+         fc_drug_rt = fc_drug / births * 1e3,
+         fc_rt = foster_care / births * 1e3)
+
+ggplot(fc_match_count,
+       aes(x = fc_drug_rt,
+           y = race_ethn,
+           fill = rpt_reduced)) + 
+  geom_col(position = position_dodge(),
+           color = "black")
+
+# ### quality checks on substance abuse variables
+# ### very few missing, looks good!
+# ## table(is.na(afcars_19_inf$subst_ab))
+# ## by state
+# qual_check<-afcars_19_inf %>% 
+#   group_by(st) %>% 
+#   summarise(prop_subst_ab = sum(subst_ab, na.rm=T)/n())
+# 
+# ### states look highly variable, but ok
+# afcars_19_inf %>% 
+#   group_by(race_ethn) %>% 
+#   summarise(subst_ab_foster_care = sum(subst_ab, na.rm=T),
+#             foster_care = n()) %>% 
+#   left_join(pop %>% 
+#               filter(year==2018,
+#                      age == 0) %>% 
+#               group_by(race_ethn) %>% 
+#               summarise(pop = sum(pop) / 12)) %>% ### div infant pop by 12 for very rough approx, can use births later
+#   mutate(subst_ab_fc_rate = subst_ab_foster_care / pop * 1e3,
+#          fc_rate = foster_care / pop * 1e3)
+```
+
+
+
+

@@ -78,6 +78,24 @@ ggplot(rpts_pc,
        x = "Age",
        color = "Race/Ethnicity")
 
+### now just cats of mandated reporters
+ggplot(rpts_pc %>% 
+         filter(rptsrc%in%
+                  c("education", "medical", "police",
+                    "social services")),
+       aes(x = age, y = total_pc * 1000,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line() +
+  #geom_ribbon(alpha = 0.5) +
+  facet_wrap(~rptsrc) + 
+  labs(#title = "Age-specific rates of CPS investigation",
+       #subtitle = "US, 2018 by child race/ethnicity and reporter type",
+       y = "Rate per 1,000 children",
+       x = "Age",
+       color = "Race/Ethnicity")
+
+
 ```
 
 ## Report source by type of alleged maltreatment
