@@ -9,12 +9,13 @@ library(tidyverse)
 library(knitr)
 library(gridExtra)
 library(scales)
+library(RColorBrewer)
 
 knitr::opts_chunk$set(echo = F, warning = F, message = F)
 theme_set(theme_bw())
 ```
 
-```{r include=FALSE, cache = T}
+```{r include=FALSE}
 source("report_setup.r")
 ```
 
@@ -100,8 +101,7 @@ REDO THIS AS RATE RATIOS
 #### FIG 2 MEDICAL TIME SERIES RPT RATE AND RATE RATIO
 
 plot_dat<-nat_ncands %>% 
-  filter(rptsrc=="Medical",
-         age == 0) %>% 
+  filter(rptsrc=="Medical") %>% 
   group_by(.imp, year, race_ethn) %>% 
   summarise(n = sum(n_total)) %>%
   ungroup() %>% 
@@ -143,8 +143,9 @@ p1<-ggplot(plot_dat,
        y = "Investigation rate ratio (relative to white)",
        color = "",
        fill = "") + 
-  theme(legend.position = "none") + 
-  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018))
+  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")
 
 p2<-ggplot(plot_dat,
        aes(x = year,
@@ -159,9 +160,12 @@ p2<-ggplot(plot_dat,
        y = "Investigations per 1,000 infants",
        color = "",
        fill = "") + 
-  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018))
+  theme(legend.position = "none") + 
+  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")
 
-grid.arrange(p1, p2, nrow = 1)
+grid.arrange(p2, p1, nrow = 1)
 ```
 
 Describe panel 1 and panel 2
@@ -170,8 +174,7 @@ Describe panel 1 and panel 2
 library(geofacet)
 ### appx fig map of med rpt rate by state
 plot_dat<-state_ncands %>% 
-  filter(rptsrc=="Medical",
-         age == 0) %>% 
+  filter(rptsrc=="Medical") %>% 
   group_by(.imp, staterr, year, race_ethn) %>% 
   summarise(n = sum(n_total)) %>%
   ungroup() %>% 
@@ -198,29 +201,169 @@ ggplot(plot_dat,
   geom_line() +
   facet_geo(~state) + 
   coord_cartesian(ylim = c(0, 200)) + 
-  scale_x_discrete(labels = rep("", 10), breaks = 2010:2019) + 
+  scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
   labs(x = "Year (2010 - 2019)", y = "Reports per 1,000 infants", fill = "Race / Ethnicity",
-       color = "Race / Ethnicity")
+       color = "Race / Ethnicity") + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")
 ```
 
 
-## STATES WITH VALID DRUG REPORTING NCANDS DATA
+## STATES WITH VALID DRUG REPORTING NCANDS DATA (OVERALL PICTURE)
 
 REPLICATE FIG1, 2, 3 for SUBSET in SINGLE GRID PLOT
 
 ```{r}
-### fig 3 rates for states with valid drug report data
-### check on substantiation for data quality
+plot_dat<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(state, year, race_ethn) %>% 
+  summarise(n = mean(n_total),
+            nmax = max(n_total),
+            nmin = min(n_total)) %>% 
+  ungroup() %>% 
+  left_join(pop) %>% 
+  group_by(year, race_ethn) %>% 
+  summarise(n = sum(n), nmax = sum(nmax),
+            nmin = sum(nmin), pop = sum(pop)) %>% 
+  mutate(r = n / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000)
 
-### compute per capita rpt rates for w/subst_ab
-ggplot(state_dat_subst,
-       aes(x = year, 
-           y = pct_subst_mn,
-           color = race_ethn)) + 
-  geom_line() + 
-  facet_wrap(~state)
-### I don't think this is useable...
-### going to need to do the AFCARS backtrace  
+wht_dat<-plot_dat %>% 
+  filter(race_ethn == "White") %>% 
+  select(-race_ethn, -n, -nmax, -nmin, -pop) %>% 
+  rename(r_w = r,
+         r_w_max = rmax,
+         r_w_min = rmin) 
+
+plot_dat<-plot_dat %>% 
+  left_join(wht_dat) %>% 
+  mutate(d = r / r_w,
+         dmin = rmin / r_w_max,
+         dmax = rmax / r_w_min)
+
+p1<-ggplot(plot_dat,
+       aes(x = year, y = r,
+           ymax = rmax, ymin = rmin,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line()+
+  geom_ribbon(alpha = 0.5, color = NA) + 
+  labs(x = "Year",
+       y = "Rate per 1,000 infants",
+       color = "",
+       fill = "") + 
+  theme(legend.position = "none") + 
+  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")
+
+p2<-ggplot(plot_dat,
+       aes(x = year, y = d,
+           ymax = dmax, ymin = dmin,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line()+
+  geom_ribbon(alpha = 0.5, color = NA) + 
+  labs(x = "Year",
+       y = "Rate ratio (relative to white)",
+       color = "",
+       fill = "") + 
+  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")
+
+grid.arrange(p1, p2, nrow = 1)
+
 ```
 
+## BY STATE
+
+```{r}
+#### Total rate plot
+plot_dat<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(.imp, state, year) %>% 
+  summarise(n = sum(n_total)) %>% 
+  group_by(state, year) %>% 
+  summarise(n_mn = mean(n),
+            nmin = min(n),
+            nmax = max(n)) %>% 
+  ungroup() %>% 
+  left_join(pop %>% 
+              group_by(year, state) %>% 
+              summarise(pop = sum(pop))) %>% 
+   mutate(r = n_mn / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000)
+
+ggplot(plot_dat,
+       aes(x = year,
+           y = r,
+           ymax = rmax,
+           ymin = rmin)) + 
+  geom_ribbon(alpha = 0.5, color = NA) +
+  geom_line() +
+  facet_wrap(~state) +
+  scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
+  labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants")
+```
+
+
+
+
+```{r}
+#### FUNKY BY RACE PLOT, BUT INFORMATTIVE
+plot_dat<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(state, year, race_ethn) %>% 
+  summarise(n = mean(n_total),
+            nmax = max(n_total),
+            nmin = min(n_total)) %>% 
+  ungroup() %>% 
+  left_join(pop) %>% 
+   mutate(r = n / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000)
+
+race_dat_19<-plot_dat %>% 
+  filter(year == 2019)
+
+ggplot(plot_dat,
+       aes(x = year,
+           y = r,
+           ymax = rmax,
+           ymin = rmin,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_ribbon(alpha = 0.5, color = NA) +
+  geom_line() +
+  facet_wrap(~state) +
+  scale_y_log10() + 
+  scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
+  labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants (logarithmic axis)",
+       color = "Race / ethnicity",
+       fill = "Race / ethnicity")+ 
+  scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")
+
+ggplot(race_dat_19,
+       aes(x = race_ethn,
+           y = r,
+           fill = race_ethn)) + 
+  geom_col()+
+  facet_wrap(~state) +
+  labs(fill = "Race / ethnicity") + 
+  theme(axis.text.x = element_blank()) + 
+  labs(x = "",
+       y = "Rate per 1,000 infants") + 
+  scale_fill_brewer(palette = "Dark2")
+
+```
 
