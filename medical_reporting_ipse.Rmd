@@ -1,0 +1,231 @@
+---
+title: "Racial inequality in medical professional reporting of suspected infant substance exposure"
+author: "the crew"
+output: word_document
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(knitr)
+library(gridExtra)
+library(scales)
+library(RColorBrewer)
+
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+theme_set(theme_bw())
+```
+
+```{r include=FALSE}
+source("report_setup.r")
+```
+
+
+## IPSE
+
+Figure \@ref(fig:ipse-nat) shows the rates at which infants were the subject of a screened-in maltreatment report involving allegations of substance abuse in states with valid data (see \@ref(fig:ipse-state-ts) for details). There has been a dramatic increase in such reports since for all groups of children. Black infants were reported for allegations of substance abuse related maltreatment by medical professionals at a rate of 44 per 1,000 in 2019, and American Indian and Alaska Native children were reported at a rate of between 29 and 35 per 1,000. Across these states, Black children were reported by medical professionals 2.3 times more frequently than white chiildren, and AIAN children were reported 1.6 times more frequently than white children. 
+
+```{r ipse-nat}
+plot_dat<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(state, year, race_ethn) %>% 
+  summarise(n = mean(n_total),
+            nmax = max(n_total),
+            nmin = min(n_total)) %>% 
+  ungroup() %>% 
+  left_join(pop) %>% 
+  group_by(year, race_ethn) %>% 
+  summarise(n = sum(n), nmax = sum(nmax),
+            nmin = sum(nmin), pop = sum(pop)) %>% 
+  mutate(r = n / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000)
+
+wht_dat<-plot_dat %>% 
+  filter(race_ethn == "White") %>% 
+  select(-race_ethn, -n, -nmax, -nmin, -pop) %>% 
+  rename(r_w = r,
+         r_w_max = rmax,
+         r_w_min = rmin) 
+
+plot_dat<-plot_dat %>% 
+  left_join(wht_dat) %>% 
+  mutate(d = r / r_w,
+         dmin = rmin / r_w_max,
+         dmax = rmax / r_w_min)
+
+p1<-ggplot(plot_dat,
+       aes(x = year, y = r,
+           ymax = rmax, ymin = rmin,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line()+
+  geom_ribbon(alpha = 0.5, color = NA) + 
+  labs(x = "Year",
+       y = "Rate per 1,000 infants",
+       color = "",
+       fill = "") + 
+  #theme(legend.position = "none") + 
+  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2") +
+  ggsave("./vis/ipse_fig_3.png", width = 6)
+
+p2<-ggplot(plot_dat,
+       aes(x = year, y = d,
+           ymax = dmax, ymin = dmin,
+           color = race_ethn,
+           fill = race_ethn)) + 
+  geom_line()+
+  geom_ribbon(alpha = 0.5, color = NA) + 
+  labs(x = "Year",
+       y = "Rate ratio (relative to white)",
+       color = "",
+       fill = "") + 
+  scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
+    scale_fill_brewer(palette = "Dark2") + 
+  scale_color_brewer(palette = "Dark2")+
+  ggsave("./vis/ipse_fig_4.png", width = 6)
+
+p1
+p2
+
+
+plot_dat_19<-plot_dat %>% 
+  filter(year == 2019)
+
+ggplot(plot_dat_19,
+       aes(x = reorder(race_ethn, r),
+           y = r, 
+           ymin = rmin,
+           ymax = rmax,
+           fill = race_ethn)) + 
+  geom_col(color = "black") + 
+  geom_linerange(alpha = 0.5, size = 3) +
+  coord_flip() + 
+  scale_fill_brewer(palette = "Dark2") + 
+  theme(legend.position = "hide") + 
+  labs(x = "",
+       y = "Rate per 1,000 infants") + 
+  ggsave("./vis/ipse_fig_1.png", width = 6)
+
+  
+
+```
+
+Figure \@ref(fig:ipse-state-ts) shows substance abuse investigation rates for each state-year with valid data between 2010 and 2019. While some states had low volumes of infant investigations with a reported substance abuse risk factor originated by a medical professional across these 10 years (Alabama, Colorado, Hawaii, Maryland, New Jersey, South Dakota, Texas), there were increases over time in the volume of reports in many states (e.g. Arizona, Michigan, Ohiio, Minnesota, West Virginia).
+
+```{r ipse-state-ts, fig.cap="Medical maltreatment reporting rate involving allegations of substance abuse per 1,000 infants for states with valid data, 2010 - 2019"}
+#### Total rate plot
+plot_dat<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  filter(!staterr%in%c("IL", "NV", "DC")) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(.imp, state, year) %>% 
+  summarise(n = sum(n_total)) %>% 
+  group_by(state, year) %>% 
+  summarise(n_mn = mean(n),
+            nmin = min(n),
+            nmax = max(n)) %>% 
+  ungroup() %>% 
+  left_join(pop %>% 
+              group_by(year, state) %>% 
+              summarise(pop = sum(pop))) %>% 
+   mutate(r = n_mn / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000)
+
+ggplot(plot_dat,
+       aes(x = year,
+           y = r,
+           ymax = rmax,
+           ymin = rmin)) + 
+  geom_ribbon(alpha = 0.5, color = NA) +
+  geom_line() +
+  facet_wrap(~state) +
+  scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
+  scale_y_continuous(labels = c(0, 30, 60), breaks = c(0, 30, 60)) + 
+  labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants")
+```
+
+Figure \@ref(fig:ipse-race) shows the rates of reporting by race/ethnicity for states with valid data in 2019 by infant race / ethnicity. While there are clear inequalities in exposure to reporting nationally, there are pronounced inequalities in many states. In West Virginia, Michigan, Ohio, and Nevada, more than one in ten Black infants were the subject of a subtance abuse malreatment report filed by medical professionals in 2019. In Minnesota in 2019, about 17 percent of American Indian infants were subject to such a report. 
+
+South Dakota had highest in the nation inequalities in infant substance exposure reporting in 2019. American Indian infants were more than 20 times more likely than white infants to be the subject of a screened-in maltreatment report. In Minnesota, American Indian infants were 13 times more likely to be reported than white infants. Black infants in Minnesota were 7 times more likely to be reported than white infants. In Washington DC, Black infants were about 10 times more likely to be reported by medical professionals for substance exposure in 2019 than were white infants.
+
+```{r ipse-race, fig.cap = "Medical maltreatment reporting rate involving allegations of substance abuse per 1,000 infants by race/ethnicity for states with valid data, 2019"}
+#### FUNKY BY RACE PLOT, BUT INFORMATTIVE
+plot_dat<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(state, year, race_ethn) %>% 
+  summarise(n = mean(n_total),
+            nmax = max(n_total),
+            nmin = min(n_total)) %>% 
+  ungroup() %>% 
+  left_join(pop) %>% 
+   mutate(r = n / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000)
+
+race_dat_19<-plot_dat %>% 
+  filter(year == 2019)
+
+race_dat_19_w<-race_dat_19 %>% 
+  filter(race_ethn == "White") %>% 
+  rename(rw = r,
+         rwmax = rmax,
+         rwmin = rmin) %>% 
+  select(-n, -nmax, -nmin, -pop, -age, -race_ethn)
+
+race_dat_19<- race_dat_19 %>% 
+  left_join(race_dat_19_w) %>% 
+  mutate(d = r/rw,
+         dmax = rmax/rwmin,
+         dmin = rmin/rwmax) %>% 
+  select(-st_fips, -age)
+
+# ggplot(plot_dat,
+#        aes(x = year,
+#            y = r,
+#            ymax = rmax,
+#            ymin = rmin,
+#            color = race_ethn,
+#            fill = race_ethn)) + 
+#   geom_ribbon(alpha = 0.5, color = NA) +
+#   geom_line() +
+#   facet_wrap(~state) +
+#   scale_y_log10() + 
+#   scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
+#   labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants (logarithmic axis)",
+#        color = "Race / ethnicity",
+#        fill = "Race / ethnicity")+ 
+#   scale_fill_brewer(palette = "Dark2") + 
+#   scale_color_brewer(palette = "Dark2")
+
+ggplot(race_dat_19,
+       aes(x = reorder(race_ethn, r),
+           y = r,
+           ymin = rmin, 
+           ymax = rmax,
+           fill = race_ethn)) + 
+  geom_col()+
+  geom_linerange(alpha = 0.5) + 
+  facet_wrap(~state) +
+  labs(fill = "Race / ethnicity") + 
+  labs(x = "",
+       y = "Rate per 1,000 infants") + 
+  scale_fill_brewer(palette = "Dark2")+
+  coord_flip() + 
+  theme(axis.text.y = element_blank(), 
+        legend.position = "bottom") + 
+  scale_y_continuous(labels = c(0, 100, 200), breaks = c(0,  100,  200)) + 
+  ggsave("./vis/ipse_fig_2.png", width = 6, height = 6)
+
+```
+
+## Discussion and Conclusion
+
+Smart summary and recommendations here
