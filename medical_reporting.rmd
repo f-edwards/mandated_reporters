@@ -1,7 +1,7 @@
 ---
 title: "Medical reporting of infants for child abuse and neglect, national"
-author: "Frank Edwards"
-output: bookdown::pdf_document2
+author: "the crew"
+output: word_document
 ---
 
 ```{r include=FALSE}
@@ -21,46 +21,34 @@ source("report_setup.r")
 
 ## Intro
 
-In 1990, Chasnoff and colleagues published a study based on data they collected in Pinellas County, Florida. In this paper, the authors documented no statistically significant differences by race/ethnicity in the proportion of pregnant women using alcohol and drugs at their first prenatal visit, but found that Black women were 10 times more likely than white women to be reported togovernment health authorities after delivery for “maternal substance abuse during pregnancy.” [CITATION]. In the three decades since it was published, this paper has been cited over 900 times in the scholarly literature, and continues to be used by scholars, clinicians, and activists as a justification for their efforts to reduce racial inequities in reporting to government authorities ingeneral and Child Protective Services (CPS) in particular related to maternal substance use during pregnancy. A recent ACOG [SPELL OUT] statement named the importance of reducing these inequities [SAY MORE – MISHKA?]. 
+In 1990, Chasnoff and colleagues published a study based on data they collected in Pinellas County, Florida. In this paper, the authors documented no statistically significant differences by race/ethnicity in the proportion of pregnant women using alcohol and drugs at their first prenatal visit, but found that Black women were 10 times more likely than white women to be reported to government health authorities after delivery for “maternal substance abuse during pregnancy.” [CITATION]. In the three decades since it was published, this paper has been cited over 900 times in the scholarly literature, and continues to be used by scholars, clinicians, and activists as a justification for their efforts to reduce racial inequities in reporting to government authorities in general and Child Protective Services (CPS) in particular related to maternal substance use during pregnancy. A recent ACOG [SPELL OUT] statement named the importance of reducing these inequities [SAY MORE – MISHKA?]. 
 
 Between 1990 and 2021, the number of states with laws mandating reporting of alcohol and/or drug use during pregnancy to health authorities and/or CPS increased from X to X. Over this same time period, hospitals have developed and revised policies and protocols to guide what some [CLINICICIANS, ACTIVISTS?] have started to refer to as “test and report” policies. Suchprotocols/policies are designed both to ensure legally mandated reporting occurs [NOT SURE WE WANT TO SAY THIS] and also with a stated goal of reducing racial inequities in reporting to CPS [CITATIONS]. 
 
 Despite all of this state and hospital-policy activity over this time period, we have very little information about reporting to CPS related to pregnant people’s use of alcohol and drugs [I’M USING DIFFERENT LANGUAGE IN DIFFERENT PLACES SO WE CAN HAVE AN INTENTIONAL CONVERSAITON ABOUT THE LANGUAGE TO USE] in general or in the extent to which such reporting inequities persist. Studying current reporting rates and current inequities in reporting is important, as these state and hospital policies could plausibly influence both of them. Specifically, such policies could reduce racial inequities in reporting by eliminating bias in individual practices; yet, the one study that evaluated such a hospital policy found that standardizing practices may just institutionalize the racism that existed in previous provider practices [CITATION]. To the extent such policy changes contribute to reduced racial inequities in reporting, it could be either through increasing the numbers of white newborns reported or in decreasing the number of Black newborns reported [CITATION]. The ways that reduced inequities come to be matter [SAY SOMETHING MORE AND MORE CRITICAL OF CHILD WELFARE SYSTEM].  
 
-Yet, since 1990, only a few studies have looked at reporting of newborns related to maternal substance use during pregnancy. The few studies that have been published find that rates of CPS reporting related to maternal alcohol and/or drug use during pregnancy range from 0.3% of live births to 0.8% of live births.{Hoerr, 2018 #7245;Rebbe, 2019 #7261;Prindle, 2018 #7260;Putnam-Hornstein, 2016 #6591;Roberts, 2012 #4240}  Reports to health authorities (such as the health department), often for data and treatment purposes, may be slightly higher, i.e. around 1.2% in one study.{Hoerr, 2018 #7245}  The two studies that have looked at racial inequities in reporting find that health care providers report Black newborns to CPS or health authorities up to four to five times more often than they report White newborns,{Roberts, 2015 #5877;Roberts, 2012 #4240} with about 2.5% of Black newborns reported in another.{Roberts, 2015 #5877;Roberts, 2012 #4240} Most of these data, though, come from single states or single 
-counties and are more than a decade old.  The two studies that examine racial inequities in reporting come from Northern California counties in the mid-2000s and thus may not be generalizable to other areas of the country or other time periods.
+Yet, since 1990, only a few studies have looked at reporting of newborns related to maternal substance use during pregnancy. The few studies that have been published find that rates of CPS reporting related to maternal alcohol and/or drug use during pregnancy range from 0.3% of live births to 0.8% of live births.{Hoerr, 2018 #7245;Rebbe, 2019 #7261;Prindle, 2018 #7260;Putnam-Hornstein, 2016 #6591;Roberts, 2012 #4240}  Reports to health authorities (such as the health department), often for data and treatment purposes, may be slightly higher, i.e. around 1.2% in one study.{Hoerr, 2018 #7245}  The two studies that have looked at racial inequities in reporting find that health care providers report Black newborns to CPS or health authorities up to four to five times more often than they report White newborns,{Roberts, 2015 #5877;Roberts, 2012 #4240} with about 2.5% of Black newborns reported in another.{Roberts, 2015 #5877;Roberts, 2012 #4240} Most of these data, though, come from single states or singlecounties and are more than a decade old.  The two studies that examine racial inequities in reporting come from Northern California counties in the mid-2000s and thus may not be generalizable to other areas of the country or other time periods.
 
 National data exist about racial differences [NEED TO AGREE UPON CONSISTENT LANGUAGE] in child welfare involvement in general [FRANK, I THINK YOU WROTE THE RECENT PAPER ON ESTIMATING RACIAL DIFFERENCES IN RATES OF INVOLVEMENT IN GENERAL AND IT WOULD BE GREAT IF YOU COULD FILL IT IN].This data source also includes a variable for report source and age of child at the report, which could be used to estimate reporting rates overall and racial differences in reporting rates. Yet the data collection system on which these estimates are based has, historically, not included codes for whether the report was related to substance use [CONFIRM] in general or maternal substanceuse during pregnancy [LANGUAGE] in particular. As of X date, though [DUE TO A NEW POLICY REQUIREMENT?], multiple states have started to include a variable for these types of reports. Thus, in this paper, we examine [DATA SOURCE DATA] to estimate the extent to which health care providers report infants to CPS related to maternal substance use during pregnancy and to describe the racial inequities in such reporting. This analysis is important as it contributes to our growing understanding of the ways that health providers uphold [WORD CHOICE] structural racism and can serve as a baseline to evaluate future efforts to reduce racial inequities in reporting and [SOMETHING ELSE]. 
 
-## Methods
+## Data and Methods
 
-### data sources
+Data for this study are derived from the National Child Abuse and Neglect Data System (NCANDS) and population data compiled by the Surveillance, Epidemiology, and End Results Program (SEER) at the National Institutes for Health. We use these datasets to compute the size of infant (age 0 to 1) populations by race/ethnicity (bridged, 5 category) by year and state (SEER data), and the number of infants who were subject to child welfare agency response (NCANDS data). We use 10 years of data, 2010 - 2019, to examine both change over time and to provide more stable estimates for some relatively group sizes within states. 
 
-NCANDS, AFCARS, SEER pop
+NCANDS provides report-child level information on all cases of alleged child abuse and neglect reported to state child welfare agencies that are 'screened-in' and receive an agency response (typically an investigation, but also includes alternative responses). We construct several kinds of infant case counts using the NCANDS. NCANDS reliably records the original source of a child malreatment report through a series of categories identifying either the kind of professional or kind of non-professional the individual reporter may be most closely identified with. For this study, we focus primarily on reporters identified as medical personnel, though we also compare medical personnel reporting rates to rates of other professional reporters (see Figure 1). NCANDS also reliably reports child race / ethnicity and child age at time of investigation. For the small number of cases missing information on child age, race / ethnicity, or report source, we compute multiple imputations of missing data ($m=6$) using child-level characteristics and state-level demographics as model predictors. 
 
-### data quality and missing data imputation
+NCANDS collects information on a series of 'risk' variables that may be documented by an intake or investigations child protection agency caseworker. These variables include four substance abuse variables used by the US Children's Bureau to identify children reported for infant or pre-natal substance exposure (CITE CM REPORT 19); child druge abuse, caretaker drug abuse, child alcohol abuse, and caretaker alcohol abuse. Following US Children's Bureau methodologies (CITE CM REPORT 19), we identify cases of infant or prenatal substance exposure as those unique children who were 1) reported by a medical professional; 2) reported before their first birthday; and 3) included a report of any drug or alcohol risk factor. The quality of measurement on 'risk' variables varies tremendously across jurisdictions and over time. In 2019, the US Children's Bureau identified 5 states with unreliable data. Among the remaining states for that period, many report high levels of missing data on focal risk variables or report implausibly report counts. Because of the very high volume of missing risk factor data nationally, and likely violation of the key missing at random assumption, we do not employ multiple imputation to account for error in risk factor variables. 
 
-talk about inclusion criteria for NCANDS drugs. NAME STATES WITH POOR DATA
-
-we don't impute rptsrc. assumption is rptsrc == medical is much less likely to be missing than other categories, so pr(missing) ~ pr(medical) and we don't meet MAR assumptions. impute chage and race_ethn
-
-there are a small N of prenatal investigations reported (0.1% of all compared to 8% for infants) - we lump them with infants for convenience. 
-
-alternative with births data might be better, but the race data isn't a great match because of mom/dad race variables. requires assumptions about race id - using CDC seer data for simplicity on match
-
-### data matching / other methods? no models here
+Instead, we use a conservative set of state inclusion criteria. For all reports of infants originated by medical personnel, we compute state-year measures of aggregate missingness on the four substance abuse risk variables [caretaker / child drug abuse, caretaker / child alcohol abuse] and aggregate measures of positive risk identification. We exclude all states-years with more than 20 percent of risk data missing and all state-years that report substance abuse risk in fewer than 1 percent of all medical originated infant maltreatment reports. These criteria result in a sample of 243 of 456 possible state-years between 2010 and 2019. A full table of included states and years, as well as a visualizaton of our inclusion criteria are provided in the appendix (TABLE A1, FIG A1). This sample includes at least partial data from 36 states, and includes complete (2010 - 2019) data from Alaska, Alabama, Colorado, Hawaii, Indiana, Maine, Minnesota, Mississippi, New Jersey, New Mexico, South Dakota, Texas, Utah, Wisconsin, and West Virginia.
 
 ## Results
 
-### Report source
+### Medical professional reporting of child maltreatment
 
-Medical professionals are a major source of reports to child protection agencies, and consitute a key component of systems of family surveillance organized under the umbrella of mandated reporting. Medical professionals were the origin of `r nat_ncands %>% filter(.imp==1, rptsrc=="medical") %>% summarise(n_total = sum(n_total))` investigated maltreatment reports in 2018, about 9 percent of all reports nationally. Medical professionals were responsible for about 14 percent of all investigations originating from a professional mandated reporter. We show the distribution of reports by source and child age for 2018 in Figure \@ref(fig:all).
+Medical professionals are a major source of reports to child protection agencies, and consitute a key component of systems of family surveillance organized under the umbrella of mandated reporting (CITES). In 2019, medical professionals reported more than 100,000 infants to child welfare agencies, about 3 percent of all children born than year. Between 2010 and 2019, medical professionals were responsible for about 25 percent of all screened-in maltreatment reports involving an infant in the US. Both the volume of medical professional infant maltreatment reports and their proportion of all reported infants has increased subsatntially over this 10 year period. Figure \@ref(fig:rpt-ts) shows the total count of screened-in maltreatment reports involving infants filed by professional mandated reporters between 2010 and 2019. 
 
-Figure \@ref(fig:allRace) shows rates of reporting by type of reporter by child race/ethnicity and age. For the most active types of mandated reporters -- education personnel, medical personnel, police, and social service personnel -- Black and Native children are reported more often than their white peers. Note that medical professionals report Black and Native infants at exceptionally high rates. 
-
-```{r all, fig.cap = "Children subject to CPS investigations in 2018"}
+```{r rpt-ts, fig.cap = "Children subject to CPS investigations in 2018"}
 #### FIG 1 reporting rates for all professional mandated reporters, 2010 - 2019 average rates
-### DO THIS AS A TS
 
 plot_dat<-nat_ncands %>% 
   ungroup() %>% 
@@ -85,19 +73,10 @@ ggplot(plot_dat,
 
 ```
 
-
-FIG 1 TS of counts relative to other reporters
-FIG 2 is MED PER CAPITA BY RACE AND RATE RATIO
+Between 2010 and 2019, the number of infants subject to maltreatment reports filed by medical professionals doubled, from 53,000 in 2010 to 107,000 in 2019. In 2019, Medical professionals were responsible for 49 percent of all screened-in reports from professional mandated reporters with infant subjects. Medical professionals were responsible for 36 percent of these reports in 2010. Medical professionals are the most common source of screened-in infant-involved reports to child protection agencies in the US.
 
 
-ESTABLISHED THAT MEDICAL REPORTS INFANTS AT HIGHER RATES THAN OTHER MANDATED RPTRS
-
-NEXT LOOK AT MEDICAL TIME SERIES
-
-REDO THIS AS RATE RATIOS
-
-
-```{r}
+```{r rpt-race, fig.cap = "Medical maltreatment reporting rate per 1,000 infants by race / ethnicity (left panel) and rate ratio relative to white children (right panel)."}
 #### FIG 2 MEDICAL TIME SERIES RPT RATE AND RATE RATIO
 
 plot_dat<-nat_ncands %>% 
@@ -140,7 +119,7 @@ p1<-ggplot(plot_dat,
   geom_line() + 
   geom_ribbon(alpha = 0.5, color = NA) + 
   labs(x = "Year",
-       y = "Investigation rate ratio (relative to white)",
+       y = "Rate ratio (relative to white)",
        color = "",
        fill = "") + 
   scale_x_continuous(breaks = c(2010, 2012, 2014, 2016, 2018)) + 
@@ -157,7 +136,7 @@ p2<-ggplot(plot_dat,
   geom_line() + 
   geom_ribbon(alpha = 0.5, color = NA) + 
   labs(x = "Year",
-       y = "Investigations per 1,000 infants",
+       y = "Rate per 1,000 infants",
        color = "",
        fill = "") + 
   theme(legend.position = "none") + 
@@ -168,9 +147,11 @@ p2<-ggplot(plot_dat,
 grid.arrange(p2, p1, nrow = 1)
 ```
 
-Describe panel 1 and panel 2
+Figure \@ref(fig:rpt-race) shows the racial and ethnic composition of infants in the reports filed by medical professionals from 2010 - 2019. The left panel shows the incidence of screened-in reports per 1,000 infants by group, and the right panel shows the rate ratio for each group relative to white infants. At the national level, Black infants are more likely to be the subject of maltreatment reports by medical professionals than infants of any other group. Between 2010 and 2019, the rate at which medical professionals reported Black infants to child protection agencies increased by 230 percent. In 2010, Black infants were reported at a rate of about 24 per 1,000 infants. By 2019, this had increased to a rate of 56 per 1,000 infants. In 2019, medical professionals generated maltreatment reports for about 37 per 1,000 American Indian and Alaska Native infants, 26 per 1,000 white infants, 18 per 1,000 Latinx infants, and 7 per 1,000 Asian / Pacific Islander infants. 
 
-```{r}
+The right panel of Figure \@ref(fig:rpt-race) shows a national rate ratio of medical reporting for infants of color relative to white infants between 2010 and 2019. In 2019, Black infants were reported 2.2 times more frequently than white infants, and American Indian and Alaska Native infants were reported 1.4 times more often than white infants. Latinx and Asian / Pacific Islander infants were reported by medical professionals less frequently than white infants.
+
+```{r rpts-st, fig.cap = "Medical maltreatment reporting rate per 1,000 children by race / ethnicity and state"}
 library(geofacet)
 ### appx fig map of med rpt rate by state
 plot_dat<-state_ncands %>% 
@@ -208,12 +189,13 @@ ggplot(plot_dat,
   scale_color_brewer(palette = "Dark2")
 ```
 
+Figure \@ref(fig:rpts-st) shows the rates at which medical professionals report infants for maltreatment to child protection agencies by race/ethnicity across states. While the observed national trend of increased reporting over time holds uniformly across places, there is tremendous heterogeneity in both the levels and inequalities in reporting across places. In 2019, medical professionals initiated maltreatment investigations involving more than 30 percent of all Black infants in West Virginia. More than 15 percent of American Indian infants in Minnesota, and Black infants in Michigan, Arizona, and Indiana were the subject of medical initiated maltreatment investigations in 2019. 
 
-## STATES WITH VALID DRUG REPORTING NCANDS DATA (OVERALL PICTURE)
+## IPSE
 
-REPLICATE FIG1, 2, 3 for SUBSET in SINGLE GRID PLOT
+Figure \@ref(fig:ipse-nat) shows the rates at which infants were the subject of a screened-in maltreatment report involving allegations of substance abuse in states with valid data (see \@ref(fig:ipse-state-ts) for details). There has been a dramatic increase in such reports since for all groups of children. Black infants were reported for allegations of substance abuse related maltreatment by medical professionals at a rate of 44 per 1,000 in 2019, and American Indian and Alaska Native children were reported at a rate of between 29 and 35 per 1,000. Across these states, Black children were reported by medical professionals 2.3 times more frequently than white chiildren, and AIAN children were reported 1.6 times more frequently than white children. 
 
-```{r}
+```{r ipse-nat, fig.cap= "Medical maltreatment reporting rate involving allegations of substance abuse per 1,000 infants by race / ethnicity (left panel) and rate ratio relative to white children (right panel)"}
 plot_dat<-state_ipse %>% 
   filter(ipse==T) %>% 
   rename(state = staterr,
@@ -279,12 +261,13 @@ grid.arrange(p1, p2, nrow = 1)
 
 ```
 
-## BY STATE
+Figure \@ref(fig:ipse-state-ts) shows substance abuse investigation rates for each state-year with valid data between 2010 and 2019. While some states had low volumes of infant investigations with a reported substance abuse risk factor originated by a medical professional across these 10 years (Alabama, Colorado, Hawaii, Maryland, New Jersey, South Dakota, Texas), there were increases over time in the volume of reports in many states (e.g. Arizona, Michigan, Ohiio, Minnesota, West Virginia).
 
-```{r}
+```{r ipse-state-ts, fig.cap="Medical maltreatment reporting rate involving allegations of substance abuse per 1,000 infants for states with valid data, 2010 - 2019"}
 #### Total rate plot
 plot_dat<-state_ipse %>% 
   filter(ipse==T) %>% 
+  filter(!staterr%in%c("IL", "NV", "DC")) %>% 
   rename(state = staterr,
          year = subyr) %>% 
   group_by(.imp, state, year) %>% 
@@ -310,13 +293,15 @@ ggplot(plot_dat,
   geom_line() +
   facet_wrap(~state) +
   scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
+  scale_y_continuous(labels = c(0, 30, 60), breaks = c(0, 30, 60)) + 
   labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants")
 ```
 
+Figure \@ref(fig:ipse-race) shows the rates of reporting by race/ethnicity for states with valid data in 2019 by infant race / ethnicity. While there are clear inequalities in exposure to reporting nationally, there are pronounced inequalities in many states. In West Virginia, Michigan, Ohio, and Nevada, more than one in ten Black infants were the subject of a subtance abuse malreatment report filed by medical professionals in 2019. In Minnesota in 2019, about 17 percent of American Indian infants were subject to such a report. 
 
+South Dakota had highest in the nation inequalities in infant substance exposure reporting in 2019. American Indian infants were more than 20 times more likely than white infants to be the subject of a screened-in maltreatment report. In Minnesota, American Indian infants were 13 times more likely to be reported than white infants. Black infants in Minnesota were 7 times more likely to be reported than white infants. In Washington DC, Black infants were about 10 times more likely to be reported by medical professionals for substance exposure in 2019 than were white infants.
 
-
-```{r}
+```{r ipse-race, fig.cap = "Medical maltreatment reporting rate involving allegations of substance abuse per 1,000 infants by race/ethnicity for states with valid data, 2019"}
 #### FUNKY BY RACE PLOT, BUT INFORMATTIVE
 plot_dat<-state_ipse %>% 
   filter(ipse==T) %>% 
@@ -335,23 +320,37 @@ plot_dat<-state_ipse %>%
 race_dat_19<-plot_dat %>% 
   filter(year == 2019)
 
-ggplot(plot_dat,
-       aes(x = year,
-           y = r,
-           ymax = rmax,
-           ymin = rmin,
-           color = race_ethn,
-           fill = race_ethn)) + 
-  geom_ribbon(alpha = 0.5, color = NA) +
-  geom_line() +
-  facet_wrap(~state) +
-  scale_y_log10() + 
-  scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
-  labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants (logarithmic axis)",
-       color = "Race / ethnicity",
-       fill = "Race / ethnicity")+ 
-  scale_fill_brewer(palette = "Dark2") + 
-  scale_color_brewer(palette = "Dark2")
+race_dat_19_w<-race_dat_19 %>% 
+  filter(race_ethn == "White") %>% 
+  rename(rw = r,
+         rwmax = rmax,
+         rwmin = rmin) %>% 
+  select(-n, -nmax, -nmin, -pop, -age, -race_ethn)
+
+race_dat_19<- race_dat_19 %>% 
+  left_join(race_dat_19_w) %>% 
+  mutate(d = r/rw,
+         dmax = rmax/rwmin,
+         dmin = rmin/rwmax) %>% 
+  select(-st_fips, -age)
+
+# ggplot(plot_dat,
+#        aes(x = year,
+#            y = r,
+#            ymax = rmax,
+#            ymin = rmin,
+#            color = race_ethn,
+#            fill = race_ethn)) + 
+#   geom_ribbon(alpha = 0.5, color = NA) +
+#   geom_line() +
+#   facet_wrap(~state) +
+#   scale_y_log10() + 
+#   scale_x_continuous(labels = rep("", 10), breaks = 2010:2019) + 
+#   labs(x = "Year (2010 - 2019)", y = "Rate per 1,000 infants (logarithmic axis)",
+#        color = "Race / ethnicity",
+#        fill = "Race / ethnicity")+ 
+#   scale_fill_brewer(palette = "Dark2") + 
+#   scale_color_brewer(palette = "Dark2")
 
 ggplot(race_dat_19,
        aes(x = race_ethn,
@@ -367,3 +366,6 @@ ggplot(race_dat_19,
 
 ```
 
+## Discussion and Conclusion
+
+Smart summary and recommendations here

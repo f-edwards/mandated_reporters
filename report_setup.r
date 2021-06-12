@@ -42,3 +42,7 @@ state_ncands<-state_ncands %>%
 nat_ncands<-nat_ncands %>% 
   group_by(.imp, year, race_ethn, rptsrc) %>% 
   summarise(n_total = sum(n_total))
+
+state_ipse<-state_ipse %>% 
+  left_join(ncands_quality) %>% 
+  filter(flag_1==T)
