@@ -45,4 +45,28 @@ nat_ncands<-nat_ncands %>%
 
 state_ipse<-state_ipse %>% 
   left_join(ncands_quality) %>% 
-  filter(flag_1==T)
+  filter(flag_1==T) 
+
+#### look at R
+qual_check2<-state_ipse %>% 
+  filter(ipse==T) %>% 
+  rename(state = staterr,
+         year = subyr) %>% 
+  group_by(state) %>% 
+  summarise(n = mean(n_total),
+            nmax = max(n_total),
+            nmin = min(n_total)) %>% 
+  ungroup() %>% 
+  left_join(pop %>% 
+              group_by(state, age) %>% 
+              summarise(pop = sum(pop))) %>% 
+  mutate(r = n / pop * 1000,
+         rmax = nmax/pop * 1000,
+         rmin = nmin/pop * 1000) %>% 
+  filter(r>0.1) %>% 
+  mutate(flag_2 = T)
+
+state_ipse<-state_ipse %>% 
+  left_join(qual_check2 %>% 
+              rename(staterr = state)) %>% 
+  filter(flag_2==T)
